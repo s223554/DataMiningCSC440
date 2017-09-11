@@ -2,6 +2,7 @@ import csv
 import pandas as pd
 import numpy as np
 import matplotlib
+import seaborn as sns
 
 matplotlib.use('TkAgg')
 
@@ -23,3 +24,13 @@ irisdata.columns = ['lsepal','wsepal','lpetal','wpetal','class']
 plt.scatter(irisdata['lsepal'],irisdata['wsepal'])
 np.percentile(irisdata['lsepal'],25)
 plt.boxplot(irisdata['lsepal'])
+
+irisdata['class'].value_counts()
+irisdata.plot(kind = 'scatter',x='lsepal',y = 'wsepal')
+sns.jointplot(x='lsepal',y='wsepal',data=irisdata, size=7)
+# add class features to plot
+sns.FacetGrid(irisdata,hue='class',size=7).map(plt.scatter,'lsepal','wsepal').add_legend()
+# view boxplot of an attribute. Add individual points.
+sns.boxplot(x='class',y='lsepal',data=irisdata)
+sns.stripplot(x='class',y='lsepal',data = irisdata,jitter = True, edgecolor = 'gray')
+
